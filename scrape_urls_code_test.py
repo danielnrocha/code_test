@@ -11,8 +11,7 @@ def crawl_urls(source_url):
     
     page = request.urlopen(source_url)
     soup = BeautifulSoup(page)
-    print(soup.prettify())
-
+    
     links_list = [link['href'] for link in soup if link.has_attr('href')]
 
     title = soup.find('div', {'class': 'title'})
@@ -40,7 +39,7 @@ def get_last_100_scrapes(schema, database, session):
 
 def send_to_db(df, schema, database, table):
 
-    db_user, db_password, db_host, db_port, schema = 'fake_user', 'fake_password', 'fake_host', 'fake_host'
+    db_user, db_password, db_host, db_port = 'fake_user', 'fake_password', 'fake_host', 'fake_port'
     params = f'{db_user}:{db_password}@{db_host}:{db_port}/{schema}'
 
     engine = create_engine("mysql+mysqlconnector://%s" % params, max_identifier_length=128, pool_size=1)
